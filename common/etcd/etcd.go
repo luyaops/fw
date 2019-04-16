@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"go.etcd.io/etcd/clientv3"
+	"time"
 )
 
 var err error
@@ -15,8 +16,8 @@ type Store struct {
 
 func (store *Store) Access() {
 	store.Client, err = clientv3.New(clientv3.Config{
-		Endpoints: []string{store.Address},
-		//DialTimeout: 5 * time.Second,
+		Endpoints:   []string{store.Address},
+		DialTimeout: 5 * time.Second,
 	})
 	if err != nil {
 		panic(err)
