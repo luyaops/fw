@@ -8,6 +8,7 @@ import (
 
 func TestZap(t *testing.T) {
 	SetLoggerLevel("debug")
+	DPanicf("this is %s log ...", "dPanicf")
 	Debugf("this is %s log ...", "debugf")
 	Info("this is info log ...")
 	Infof("this is %s log ...", "infof")
@@ -19,5 +20,5 @@ func TestZap(t *testing.T) {
 	Warnf("this is %s log ...", "warnf")
 	Errorf("this is %s log ...", "errorf")
 	Fatalf("this is %s log ...", "fatalf")
-	DPanicf("this is %s log ...", "dPanicf")
+	Panicf("this is %s log ...", "Panicf")
 }
