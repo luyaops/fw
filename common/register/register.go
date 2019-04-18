@@ -1,8 +1,8 @@
 package register
 
 import (
-	"luyaops/fw/common/etcd"
-	"luyaops/fw/common/log"
+	"github.com/luyaops/fw/common/etcd"
+	"github.com/luyaops/fw/common/log"
 )
 
 func Register(store *etcd.Store, server, apiJson string) {
