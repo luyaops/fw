@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-var client = NewStore("localhost:2379")
+var client = NewStore([]string{"localhost:2379"})
 
 func TestStore_Put(t *testing.T) {
 	if err := client.Put("test", "test etcd put function"); err == nil {

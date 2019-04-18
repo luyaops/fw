@@ -10,13 +10,13 @@ import (
 var err error
 
 type Store struct {
-	Client  *clientv3.Client
-	Address string
+	Client    *clientv3.Client
+	Endpoints []string
 }
 
 func (store *Store) Access() {
 	store.Client, err = clientv3.New(clientv3.Config{
-		Endpoints:   []string{store.Address},
+		Endpoints:   store.Endpoints,
 		DialTimeout: 5 * time.Second,
 	})
 	if err != nil {
@@ -57,9 +57,9 @@ func (store *Store) Delete(key string, opts ...clientv3.OpOption) (*clientv3.Del
 	}
 }
 
-func NewStore(address string) *Store {
+func NewStore(endpoints []string) *Store {
 	store := &Store{
-		Address: address,
+		Endpoints: endpoints,
 	}
 	store.Access()
 	return store
