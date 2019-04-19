@@ -1,4 +1,4 @@
-package types
+package core
 
 import (
 	"github.com/gogo/protobuf/protoc-gen-gogo/descriptor"

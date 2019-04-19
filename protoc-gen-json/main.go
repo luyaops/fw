@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"github.com/gogo/protobuf/proto"
 	"github.com/gogo/protobuf/protoc-gen-gogo/plugin"
-	"github.com/luyaops/api-gateway/types"
 	"github.com/luyaops/fw/common/log"
+	"github.com/luyaops/fw/core"
 	"github.com/luyaops/fw/third_party/google/api"
 	"github.com/luyaops/fw/third_party/runtime"
 	"io/ioutil"
@@ -25,21 +25,21 @@ func main() {
 		log.Panic("proto.Unmarshal error:", err)
 	}
 
-	var methods []types.MethodWrapper
+	var methods []core.MethodWrapper
 	var server string
 	for _, allProtoBuff := range request.GetProtoFile() {
 		for _, generateProtoBuff := range request.FileToGenerate {
 			if *allProtoBuff.Name == generateProtoBuff {
 				for _, service := range allProtoBuff.Service {
 					for _, md := range service.Method {
-						method := types.MethodWrapper{}
+						method := core.MethodWrapper{}
 						options := make(map[string]interface{})
 
 						method.Package = *allProtoBuff.Package
 						method.Service = *service.Name
 						method.Method = md
 						if ext, err := proto.GetExtension(md.Options, google_api.E_Http); err == nil {
-							pattern := types.Pattern{}
+							pattern := core.Pattern{}
 							rule := ext.(*google_api.HttpRule)
 							verb, path := getVerbAndPath(rule)
 							pattern.Verb = verb
